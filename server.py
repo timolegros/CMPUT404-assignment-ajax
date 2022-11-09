@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-# Copyright 2013 Abram Hindle
+# Copyright 2022 Abram Hindle, Timothee Legros
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ app.debug = True
 
 class World:
     def __init__(self):
+        self.space = {}
         self.clear()
         
     def update(self, entity, key, value):
@@ -88,7 +89,8 @@ def world():
     if request.method == 'GET':
         return json.dumps(myWorld.world())
     else:
-        return None
+        myWorld.space = request.json
+        return json.dumps(myWorld.world())
 
 @app.route("/entity/<entity>")    
 def get_entity(entity):
