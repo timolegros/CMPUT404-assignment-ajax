@@ -80,8 +80,7 @@ def hello():
 def update(entity):
     '''update the entities via this interface'''
     myWorld.set(entity, request.json)
-    print(">>>>>>>>>>>>>>>>>>>>> MyWorld:", myWorld)
-    return entity
+    return json.dumps(myWorld.get(entity))
 
 @app.route("/world", methods=['POST','GET'])    
 def world():
@@ -100,7 +99,7 @@ def get_entity(entity):
 def clear():
     '''Clear the world out!'''
     myWorld.clear()
-    return json.dumps({'status': 'Success'})
+    return json.dumps({})
 
 if __name__ == "__main__":
     app.run()
